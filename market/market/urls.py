@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from first_views import views as first_views
+from goods import views as products_vies
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,8 @@ urlpatterns = [
     path('hello', first_views.helo),
     path('date_now', first_views.date_now),
     path('buy', first_views.buy),
+
+    path('', products_vies.index),
+    path('products/', products_vies.products),
+
 ]

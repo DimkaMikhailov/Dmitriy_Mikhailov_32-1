@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% block title %}All Goods of our market{% endblock %}
+{% endblock %}
+
+{% block content %}
+    <h2 align="center">"All goods:"</h2>
+    <div align="center">
+        {% for product in goods%}
+            <div class="product-card" style="max-width: 600px;
+                                            border: 1px solid grey;
+                                            border-radius: 5px;
+                                            padding: 10px;
+                                            margin: 10px;">
+
+                <h4>{{ product.title}}</h4>
+                <p><i>{{ product.catalog_group.catalog_group_name }}</i></p>
+                <p>{{ product.description}}</p>
+                <p><b>{{product.currency}}{{product.price}}</b></p>
+                <div align="center">BUY</div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
