@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from goods.models import ProductCard
+from goods.models import ProductCard, CatalogGroup
 
 # Create your views here.
 
@@ -15,3 +15,12 @@ def products(request):
         data = {'goods': goods}
 
         return render(request, 'products/products.html', context=data)
+
+
+def categories(request):
+    if request.method == 'GET':
+
+        category = CatalogGroup.objects.all()
+        data = {'categories': category}
+
+        return render(request, 'products/categories.html', context=data)

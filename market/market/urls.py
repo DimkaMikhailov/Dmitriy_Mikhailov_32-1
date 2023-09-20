@@ -28,5 +28,6 @@ urlpatterns = [
 
     path('', products_vies.index),
     path('products/', products_vies.products),
+    path('categories/', products_vies.categories)
 
 ]

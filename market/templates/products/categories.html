@@ -20,28 +20,28 @@
 </ul>
 {% endblock %}
 
-
 {% block content %}
-    <h2 align="center">"All goods:"</h2>
+    <h2 align="center">"All categories:"</h2>
     <div align="center">
-        {% for product in goods%}
+        {% for cat in categories %}
             <div class="product-card" style="max-width: 600px;
                                             border: 1px solid grey;
                                             border-radius: 5px;
                                             padding: 10px;
                                             margin: 10px;">
-
-                <h5>{{ product.title}}</h5>
                 <div style="padding: 5px;
                             background-color: darkseagreen;
-                            font-style: oblique;">{{ product.catalog_group.all|join:" " }}</div>
-                <p style="font-size: smaller">{{ product.description}}</p>
-                <p>Price: <b>{{product.currency}}{{product.price}}</b> | amount: {{product.count}}</p>
-                <div align="center" style="background-color: wheat;
-                                           padding: 10px 5px;
-                                           width: 100px;
-                                           border-radius: 5px;">BUY</div>
-
+                            font-style: oblique;">
+                    <img style="width: 20px;" src="/static/{{cat.category_img}}" alt="{{cat.}}">
+                    {{cat}}
+                </div>
+                <ul>
+                {% for cat in cat.products.all %}
+                    <li style="text-align: left;">
+                        {{cat}}
+                    </li>
+                {% endfor %}
+                </ul>
             </div>
         {% endfor %}
     </div>
