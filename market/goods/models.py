@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 class CatalogGroup(Model):
     name = models.CharField(max_length=25)
-    img = models.ImageField(upload_to='static/img/categories/',
+    img = models.ImageField(upload_to='img/categories/',
                             verbose_name='Category Image',
                             blank=False,
                             null=False)
