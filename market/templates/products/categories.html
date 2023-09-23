@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block header %}
     {% block title %}All Goods of our market{% endblock %}
 {% endblock %}
@@ -32,17 +33,18 @@
                 <div style="padding: 5px;
                             background-color: darkseagreen;
                             font-style: oblique;">
-                    <img style="width: 20px;" src="/static/{{cat.category_img}}" alt="{{cat}}">
+                    <img style="width: 20px;" src="/{{cat.img}}" alt="{{cat.alt}}">
                     {{cat}}
                 </div>
                 <ul>
                 {% for cat in cat.products.all %}
                     <li style="text-align: left;">
-                        {{cat}}
+                        <a href="/products/{{cat.id}}/">{{cat}}</a>
                     </li>
                 {% endfor %}
                 </ul>
             </div>
         {% endfor %}
     </div>
+
 {% endblock %}

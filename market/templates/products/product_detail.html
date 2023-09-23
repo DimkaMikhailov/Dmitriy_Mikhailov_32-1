@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% block title %}{{product.id}}: {{product.title}}{% endblock %}
+{% endblock %}
+
+{% block menu %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/products/">Products</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/categories/">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">log In</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Log Out</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+    <h2 align="center">{{ product.title}}</h2>
+    <div align="center">
+        <div class="product-card" style="max-width: 600px;
+                                        border: 1px solid grey;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 10px;">
+            <div class="product-card-img" style="padding: 10px;">
+                <img src="/media/{{product.image}}/" style="max-width: 250px;">
+            </div>
+
+            <div style="padding: 5px;
+                        background-color: darkseagreen;
+                        font-style: oblique;">{{ product.catalog_group.all|join:" " }}</div>
+            <p style="font-size: smaller">{{ product.description}}</p>
+            <p>Price: <b>{{product.currency}}{{product.price}}</b> | amount: {{product.count}}</p>
+            <div align="center" style="background-color: wheat;
+                                       padding: 10px 5px;
+                                       width: 100px;
+                                       border-radius: 5px;">
+                <a href="javascript:history.back()">BACK</a>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+{% endblock %}

@@ -4,14 +4,16 @@ from django.db import models
 
 # Create your models here.
 class CatalogGroup(Model):
-    catalog_group_name = models.CharField(max_length=25)
-    category_img = models.ImageField(upload_to='img/categories/',
-                                     verbose_name='Category Image',
-                                     blank=False,
-                                     null=False)
+    name = models.CharField(max_length=25)
+    img = models.ImageField(upload_to='static/img/categories/',
+                            verbose_name='Category Image',
+                            blank=False,
+                            null=False)
+
+    alt = models.TextField(max_length=25)
 
     def __str__(self):
-        return self.catalog_group_name
+        return self.name
 
 
 class ProductCard(Model):

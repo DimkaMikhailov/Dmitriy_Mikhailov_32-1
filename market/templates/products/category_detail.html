@@ -22,9 +22,9 @@
 
 
 {% block content %}
-    <h2 align="center">"All goods:"</h2>
+    <h2 align="center">{{category.name}}</h2>
     <div align="center">
-        {% for product in goods%}
+        {% for product in category.products.all %}
             <div class="product-card" style="max-width: 600px;
                                             border: 1px solid grey;
                                             border-radius: 5px;
@@ -40,7 +40,7 @@
                             background-color: darkseagreen;
                             font-style: oblique;">
                 {% for category in product.catalog_group.all %}
-                    <a href="/category/{{category.id}}/"> {{category.name}} </a>
+                    <a href="category/{{category.id}}/"> {{category.name}} </a>
                 {% endfor %}
                 </div>
                 <p style="font-size: smaller">{{ product.description}}</p>

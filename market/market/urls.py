@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from market.settings import MEDIA_URL, MEDIA_ROOT
+
 from first_views import views as first_views
 from goods import views as products_vies
 
@@ -28,6 +31,10 @@ urlpatterns = [
 
     path('', products_vies.index),
     path('products/', products_vies.products),
-    path('categories/', products_vies.categories)
+    path('products/<int:product_id>/', products_vies.product_card),
+    path('categories/', products_vies.categories),
+    path('category/<int:category_id>/', products_vies.category_card),
 
 ]
+
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
