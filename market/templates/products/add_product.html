@@ -1,0 +1,38 @@
+{% extends 'form.html' %}
+
+{% block header %}
+    {% block title %}Add product to our market{% endblock %}
+{% endblock %}
+
+{% block menu %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/products/">Products</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/categories/">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/categories/add/">Add product</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Log Out</a>
+    </li>
+</ul>
+{% endblock %}
+{% block content %}
+    <h2 align="center">Add product to market</h2>
+{% endblock %}
+{% block action %}/products/add/{% endblock %}
+{% block form %}
+    {{ form.as_p }}
+    <div align="center" style="background-color: wheat;
+                               padding: 10px 5px;
+                               width: 100px;
+                               border-radius: 5px;" type="submit">
+        <input type="submit" value="Add" style="
+        background-color: #f5deb3;
+        border: none;">
+    </div>
+{% endblock %}
+

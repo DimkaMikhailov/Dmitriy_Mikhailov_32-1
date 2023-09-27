@@ -2,7 +2,14 @@ from django.db.models import Model
 from django.db import models
 
 
-# Create your models here.
+RATING_CHOICES = (
+    (1, 'Terrible'),
+    (2, 'Bad'),
+    (3, 'Normal'),
+    (4, 'Good'),
+    (5, 'Perfect'))
+
+
 class CatalogGroup(Model):
     name = models.CharField(max_length=25)
     img = models.ImageField(upload_to='img/categories/',
@@ -32,3 +39,13 @@ class ProductCard(Model):
 
     def __str__(self):
         return self.title
+
+
+class ProductReviews(Model):
+    review = models.TextField(verbose_name='Review')
+    rating = models.FloatField(verbose_name='Rating')
+
+    product_id = models.ForeignKey(to=ProductCard, on_delete=models.DO_NOTHING, related_name='product_id')
+
+    def __repr__(self):
+        return f'{self.review}'

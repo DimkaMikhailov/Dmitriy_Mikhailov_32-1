@@ -29,22 +29,58 @@
                                         padding: 10px;
                                         margin: 10px;">
             <div class="product-card-img" style="padding: 10px;">
-                <img src="/media/{{product.image}}/" style="max-width: 250px;">
+                <img src="{{product.image.url}}" style="max-width: 250px;">
             </div>
-
             <div style="padding: 5px;
                         background-color: darkseagreen;
                         font-style: oblique;">{{ product.catalog_group.all|join:" " }}</div>
             <p style="font-size: smaller">{{ product.description}}</p>
-            <p>Price: <b>{{product.currency}}{{product.price}}</b> | amount: {{product.count}}</p>
+            <p>Price: <b>{{product.currency}}{{product.price}}</b> | amount: {{product.count}} | rating: <b>{{rating}}</b></p>
             <div align="center" style="background-color: wheat;
                                        padding: 10px 5px;
                                        width: 100px;
                                        border-radius: 5px;">
                 <a href="javascript:history.back()">BACK</a>
             </div>
-
         </div>
+        <div class="product-card" style="max-width: 600px;
+                                        border: 1px solid grey;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 10px;">
+            <div style="padding: 5px;
+                        background-color: darkseagreen;
+                        font-style: oblique;"><b>Reviews</b></div>
+            <form action="/products/{{product.id}}/" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <p style="font-size: smaller;
+                          padding: 15px;
+                          color: green;">{{message}}</p>
+
+                <div align="center" style="background-color: wheat;
+                                           padding: 10px 5px;
+                                           width: 100px;
+                                           border-radius: 5px;
+                                           {{display}}">
+                    <input type="submit" value="Add Review" style="
+        background-color: #f5deb3;
+        border: none;">
+                </div>
+            </form>
+        </div>
+        {% for review in reviews%}
+        <div class="product-card" style="max-width: 600px;
+                                        border: 1px solid grey;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 10px;">
+            <div style="padding: 5px;
+                        background-color: darkseagreen;
+                        font-style: oblique;">Rating: {{review.rating}}</div>
+            <p>Review: {{review.review}}</p>
+        </div>
+        {% endfor %}
     </div>
     <script>
         function goBack() {
