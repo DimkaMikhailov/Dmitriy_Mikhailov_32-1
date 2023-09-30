@@ -21,6 +21,8 @@ from market.settings import MEDIA_URL, MEDIA_ROOT
 
 from first_views import views as first_views
 from goods import views as products_vies
+from users import views as user_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,13 +30,17 @@ urlpatterns = [
     path('hello', first_views.helo),
     path('date_now', first_views.date_now),
     path('buy', first_views.buy),
-
+    # products
     path('', products_vies.index),
     path('products/', products_vies.products),
     path('products/<int:product_id>/', products_vies.product_card),
     path('categories/', products_vies.categories),
     path('category/<int:category_id>/', products_vies.category_card),
     path('products/add/', products_vies.add_product),
+    # users
+    path('users/login/', user_views.login_view),
+    path('users/register/', user_views.register_view),
+    path('logout/', user_views.logout_view),
 
 ]
 

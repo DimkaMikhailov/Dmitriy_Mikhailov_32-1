@@ -12,10 +12,10 @@
         <a class="nav-link" href="/categories/">Categories</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">log In</a>
+        <a class="nav-link" href="/users/login/">log In</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Log Out</a>
+        <a class="nav-link" href="/users/register/">Register</a>
     </li>
 </ul>
 {% endblock %}
@@ -29,6 +29,11 @@
                                         padding: 10px;
                                         margin: 10px;">
             <div class="product-card-img" style="padding: 10px;">
+                <div style="
+    text-align: end;
+    font-size: small;
+    font-style: italic;
+">Buyer: {{product.author}}</div>
                 <img src="{{product.image.url}}" style="max-width: 250px;">
             </div>
             <div style="padding: 5px;

@@ -1,5 +1,7 @@
 from django.db.models import Model
 from django.db import models
+from django.http import request
+from django.contrib.auth.models import User
 
 
 RATING_CHOICES = (
@@ -33,6 +35,7 @@ class ProductCard(Model):
     description = models.TextField()
     in_stock = models.BooleanField(default=False)
     count = models.IntegerField(verbose_name='Amount')
+    author = models.ForeignKey(to=User, related_name='user', on_delete=models.DO_NOTHING)
 
     def __repr__(self):
         return f'Product={self.title}: price={self.price}{self.currency}, in_stock={self.in_stock}'
@@ -49,3 +52,4 @@ class ProductReviews(Model):
 
     def __repr__(self):
         return f'{self.review}'
+

@@ -3,8 +3,6 @@ from goods.models import ProductCard, CatalogGroup, ProductReviews
 from django.http import response
 from market.forms import AddProductReviewForm, AddProductForm
 
-# Create your views here.
-
 
 def index(request):
     if request.method == 'GET': return render(request, 'products/index.html')
@@ -85,26 +83,31 @@ def category_card(request, category_id: CatalogGroup.id):
 
 
 def add_product(request):
-    if request.method == 'GET':
+    user = request.user
+    if user.is_authenticated:
+        print(user.pk)
+        if request.method == 'GET':
+            data = {'form': AddProductForm}
+            return render(request, 'products/add_product.html', context=data)
 
-        data = {'form': AddProductForm}
-        return render(request, 'products/add_product.html', context=data)
+        if request.method == 'POST':
+            data, files = request.POST, request.FILES
+            form = AddProductForm(data, files)
+            if form.is_valid():
+                product = ProductCard(image=form.cleaned_data.get('image'),
+                                      title=form.cleaned_data.get('title'),
+                                      description=form.cleaned_data.get('description'),
+                                      price=form.cleaned_data.get('price'),
+                                      count=form.cleaned_data.get('count'),
+                                      in_stock=True if int(form.cleaned_data.get('count')) > 0 else False,
+                                      author=user)
+                product.save()
 
-    if request.method == 'POST':
-        data, files = request.POST, request.FILES
-        form = AddProductForm(data, files)
-        if form.is_valid():
-            product = ProductCard(image=form.cleaned_data.get('image'),
-                                  title=form.cleaned_data.get('title'),
-                                  description=form.cleaned_data.get('description'),
-                                  price=form.cleaned_data.get('price'),
-                                  count=form.cleaned_data.get('count'),
-                                  in_stock=True if int(form.cleaned_data.get('count')) > 0 else False)
-            product.save()
+                catalog_groups = CatalogGroup.objects.filter(id__in=form.cleaned_data.get('categories'))
+                product.catalog_group.add(*catalog_groups)
 
-            catalog_groups = CatalogGroup.objects.filter(id__in=form.cleaned_data.get('categories'))
-            product.catalog_group.add(*catalog_groups)
+                return redirect(to=product_card, product_id=product.id)
 
-            return redirect(to=product_card, product_id=product.id)
-
-        return render(request, 'products/add_product.html', context={'form': form})
+            return render(request, 'products/add_product.html', context={'form': form})
+    else:
+        return redirect(to='/users/login/')

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% block title %}Welcome friend, Log In{% endblock %}
+{% endblock %}
+
+{% block menu %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/products/">Products</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/categories/">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/users/login/">log In</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/users/register/">Register</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+    <h2 align="center">{{query.capitalize}} Page</h2>
+    <div align="center">
+        <div class="product-card" style="max-width: 600px;
+                                        border: 1px solid grey;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 10px;">
+            <div style="padding: 5px;
+                            background-color: darkseagreen;
+                            font-style: oblique;">Exists table:</div>
+            <form action="/users/{{query}}/" method="POST" style="padding: 15px;">
+                {% csrf_token %}
+                {{form.as_p}}
+                <p style="font-size: smaller;
+                          padding: 15px;
+                          color: green;">{{message}}</p>
+
+                <div align="center" style="background-color: wheat;
+                                           padding: 10px 5px;
+                                           width: 100px;
+                                           border-radius: 5px;
+                                           {{display}}">
+                    <input type="submit" value="{{query}}" style="
+        background-color: #f5deb3;
+        border: none;">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

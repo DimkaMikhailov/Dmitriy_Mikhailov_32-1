@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'first_views',
     'goods',
+    'users',
 ]
 
 MIDDLEWARE = [
