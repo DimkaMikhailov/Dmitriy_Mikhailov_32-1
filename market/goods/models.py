@@ -1,6 +1,5 @@
 from django.db.models import Model
 from django.db import models
-from django.http import request
 from django.contrib.auth.models import User
 
 

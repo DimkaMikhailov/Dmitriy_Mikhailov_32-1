@@ -18,6 +18,21 @@
     <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Log Out</a>
     </li>
+    <li class="nav-item" style="padding-top: 5px;">
+        <form action="/categories/" class="search">
+            <select name="category">
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Child">Child</option>
+                <option value="Outerwear">Outerwear</option>
+                <option value="Casual">Casual</option>
+                <option value="Sportswear">Sportswear</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Evening">Evening Attire</option>
+            </select>
+            <input type="submit" value="find">
+        </form>
+    </li>
 </ul>
 {% endblock %}
 

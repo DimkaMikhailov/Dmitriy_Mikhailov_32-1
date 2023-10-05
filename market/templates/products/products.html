@@ -17,6 +17,23 @@
     <li class="nav-item">
         <a class="nav-link" href="/products/add/">Add Product</a>
     </li>
+    <li class="nav-item" style="
+    padding-top: 5px;">
+        <form action="/products/" class="search">
+            <input type="search" name="search">
+            <input type="submit" value="search">
+        </form>
+    </li>
+    <li class="nav-item" style="
+    padding-top: 5px;">
+        <div class="pagination" style="padding-left: 15px;">
+            {% for page in page_range %}
+                <a href="/products/?page={{ page }}">
+                    <button>{{ page }}</button>
+                </a>
+            {% endfor %}
+        </div>
+    </li>
 </ul>
 {% endblock %}
 

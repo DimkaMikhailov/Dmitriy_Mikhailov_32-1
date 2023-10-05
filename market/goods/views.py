@@ -1,3 +1,5 @@
+from django.db.models import Q
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from goods.models import ProductCard, CatalogGroup, ProductReviews
 from django.http import response
@@ -10,23 +12,39 @@ def index(request):
 
 def products(request):
     if request.method == 'GET':
-
         goods = ProductCard.objects.all()
-        data = {'goods': goods}
+
+        if search := request.GET.get('search'):
+            # goods = goods.filter(title__icontains=search)
+            # goods = goods.filter(title__endswith=search)
+            # goods = goods.filter(title__startswith=search)
+            goods = goods.filter(Q(title__icontains=search) | Q(description__icontains=search))
+
+        p = Paginator(goods, 3)
+        data = {'goods': goods, 'page_range': p.page_range}
+
+        if page := request.GET.get('page'):
+            goods = p.page(page).object_list
+            data['goods'] = goods
+        else:
+            data['goods'] = p.page(1).object_list
 
         return render(request, 'products/products.html', context=data)
 
 
 def categories(request):
     if request.method == 'GET':
+        _categories = CatalogGroup.objects.all()
 
-        category = CatalogGroup.objects.all()
-        data = {'categories': category}
+        if category := request.GET.get('category'):
+            _categories = _categories.filter(name__icontains=category)
+
+        data = {'categories': _categories}
 
         return render(request, 'products/categories.html', context=data)
 
 
-def product_card(request, product_id: ProductCard.id) -> response:
+def product_card(request, product_id: ProductCard) -> response:
     if request.method == 'GET':
         product = ProductCard.objects.get(id=product_id)
 
